@@ -1,6 +1,6 @@
 # Implement-a-live-camera-capture-App-using-Apple-Core-ML-
 
-``` swift
+```swift
 //  ViewController.swift
 
 //  Created by DRUMARE
