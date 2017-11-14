@@ -4,7 +4,7 @@
 //  ViewController.swift
 //
 //  Created by DRUMARE
-//  Credits © 2017 Mohammad Azam. All rights reserved.
+//  Credits © 2017 Mohammad Azam
 //
 
 import UIKit
