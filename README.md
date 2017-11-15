@@ -4,7 +4,7 @@
 # Implement a live camera capture App using Apple Core ML
 * Mastering Core ML for iOS on Udemy by Mohammad Azam : http://bit.ly/2ADSykK
 
-``` swift
+```swift 
 //  ViewController.swift
 
 //  Created by DRUMARE
@@ -118,4 +118,5 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
     }
     
 }
+
 ```
