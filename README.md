@@ -1,3 +1,6 @@
+
+ ![alt tag](https://github.com/MagaliDrumare/Implement-a-live-camera-capture-App-using-Apple-Core-ML-/blob/master/gifstreamlive.gif)
+
 # Implement a live camera capture App using Apple Core ML
 * Mastering Core ML for iOS on Udemy by Mohammad Azam : http://bit.ly/2ADSykK
 
