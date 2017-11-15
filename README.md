@@ -15,49 +15,49 @@ import Vision
 
 class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDelegate {
     
-    // create the image and text containers
+    // Create the image and text containers
     @IBOutlet weak var imageView :UIImageView!
     @IBOutlet weak var textView :UITextView!
     
-    //import the inceptionV3 model
+    //Import the inceptionV3 model
     private let inceptionModel = Inceptionv3()
     
-    // create request variables
+    // Create request variables
     private var requests = [VNCoreMLRequest]()
     
-    // create a live session
+    // Create a live session
     let session = AVCaptureSession()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // run the function that transform the image into results
+        // Run the function that transform the image into results
         createImageRequest()
-        // run function tat stat the live stream
+        // Run function tat stat the live stream
         startLiveVideo()
     }
-    //function that transform the image into results
+    //Function that transforms the image into results
     private func createImageRequest() {
         // create the visionModel
         guard let visionModel = try? VNCoreMLModel(for: self.inceptionModel.model) else {
             fatalError("problem creating request using core ml model")
         }
-        // create the visionRequest passing the visionModel
+        // Create the visionRequest / visionModel as input 
         let visionRequest = VNCoreMLRequest(model: visionModel) {request, error in
             
             if error != nil {
                 return
             }
             
-            //obtain request results
+            //Obtain request results
             guard let observations = request.results as? [VNClassificationObservation] else {
                 return
             }
-            // map the request results
+            // Map the request results
             let classifications = observations.map { observation in
                 "\(observation.identifier) \(observation.confidence * 100.0)"
             }
-            // put the mapped results .identifier and .confidence in the textView container
+            // Put the mapped results .identifier and .confidence in the textView container
             DispatchQueue.main.async {
                 self.textView.text = classifications.joined(separator: "\n")
             }
@@ -65,7 +65,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             print(observations)
             
         }
-        // request : streaming of visionRequest
+        // Request : streaming of visionRequest
         self.requests.append(visionRequest)
     }
     
@@ -80,7 +80,7 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             requestOptions = [.cameraIntrinsics:camData]
         }
         
-        // create an let imageRequestHandler that take pixelBuffer
+        // Create a let imageRequestHandler that takes pixelBuffer as Input. 
         let imageRequestHandler = VNImageRequestHandler(cvPixelBuffer: pixelBuffer, orientation: CGImagePropertyOrientation(rawValue: 6)!, options: requestOptions)
         
         // imageRequestHandler executes requests
@@ -91,14 +91,14 @@ class ViewController: UIViewController, AVCaptureVideoDataOutputSampleBufferDele
             print(error)
         }
     }
-    // live stream function
+    // Live stream function
     private func startLiveVideo() {
         
         //1
         session.sessionPreset = AVCaptureSession.Preset.photo
         let captureDevice = AVCaptureDevice.default(for: AVMediaType.video)
         
-        //2 # the copulation must use a device not the simulator
+        //2 # The computation on your device not the simulator
         let deviceInput = try! AVCaptureDeviceInput(device: captureDevice!)
         let deviceOutput = AVCaptureVideoDataOutput()
         deviceOutput.videoSettings = [kCVPixelBufferPixelFormatTypeKey as String: Int(kCVPixelFormatType_32BGRA)]
